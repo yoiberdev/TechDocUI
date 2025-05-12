@@ -96,6 +96,7 @@
             transition: background-color 0.3s ease;
             opacity: 0;
             transform: translateY(20px);
+            cursor: pointer;
         }
 
         .sistema-table tbody tr:hover {
@@ -104,6 +105,16 @@
 
         .sistema-table tbody tr:last-child td {
             border-bottom: none;
+        }
+
+        .sistema-table a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .sistema-nombre {
+            color: var(--primary-color);
+            font-weight: 500;
         }
 
         .estado {
@@ -195,16 +206,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${sistemas}" th:data-nombre="${s.nombre}" th:data-serie="${s.numeroSerie}" th:data-ubicacion="${s.ubicacionEnEmbarcacion}">
-            <td th:text="${s.nombre}"></td>
+        <tr th:each="s : ${sistemas}"
+            th:data-nombre="${s.nombre}"
+            th:data-serie="${s.numeroSerie}"
+            th:data-ubicacion="${s.ubicacionEnEmbarcacion}"
+            th:onclick="'window.location.href=\'/sistemas/' + ${s.id} + '\''">
+            <td>
+                <a th:href="@{/sistemas/{id}(id=${s.id})}"
+                   class="sistema-nombre"
+                   th:text="${s.nombre}"></a>
+            </td>
             <td th:text="${s.numeroSerie}"></td>
             <td th:text="${s.ubicacionEnEmbarcacion}"></td>
             <td>
-                    <span th:class="'estado ' +
-                        (${s.estado == 'Activo'} ? 'estado-activo' :
-                        (${s.estado == 'Inactivo'} ? 'estado-inactivo' : 'estado-mantenimiento'))"
-                          th:text="${s.estado}">
-                    </span>
+                <span th:class="'estado ' +
+                    (${s.estado == 'Activo'} ? 'estado-activo' :
+                    (${s.estado == 'Inactivo'} ? 'estado-inactivo' : 'estado-mantenimiento'))"
+                      th:text="${s.estado}">
+                </span>
             </td>
         </tr>
         </tbody>
