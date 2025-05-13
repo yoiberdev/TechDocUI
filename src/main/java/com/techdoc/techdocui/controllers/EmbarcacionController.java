@@ -58,11 +58,6 @@ public class EmbarcacionController {
         return new CreateEmbarcacionRequest();
     }
 
-    @ModelAttribute("editForm")
-    public UpdateEmbarcacionRequest updateEmbarcacionForm() {
-        return new UpdateEmbarcacionRequest();
-    }
-
     @GetMapping("/nueva")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("embarcoForm", new CreateEmbarcacionRequest());
@@ -99,7 +94,7 @@ public class EmbarcacionController {
             request.setNotas(embarcacion.getNotas());
             request.setFechaRegistro(embarcacion.getFechaRegistro());
 
-            model.addAttribute("editForm", request);
+            model.addAttribute("embarcacion", request);
             model.addAttribute("embarcoId", id);
             return "embarcaciones/form-edit";
         } catch (Exception e) {
@@ -110,7 +105,7 @@ public class EmbarcacionController {
 
     @PostMapping("/{id}/actualizar")
     public String actualizarEmbarcacion(@PathVariable Long id,
-                                        @ModelAttribute("editForm") UpdateEmbarcacionRequest request,
+                                        @ModelAttribute("embarcacion") UpdateEmbarcacionRequest request,
                                         RedirectAttributes redirectAttributes) {
         try {
             embarcacionService.actualizarEmbarcacion(id, request);
