@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.techdoc.techdocui.TechDocUiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-13T05:41:53.141Z" hostname="ASUS" time="1.209">
+<testsuite name="com.techdoc.techdocui.TechDocUiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-13T06:00:25.355Z" hostname="ASUS" time="1.013">
   <properties/>
-  <testcase name="contextLoads()" classname="com.techdoc.techdocui.TechDocUiApplicationTests" time="1.209"/>
-  <system-out><![CDATA[00:41:48.630 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.techdoc.techdocui.TechDocUiApplicationTests]: TechDocUiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-00:41:48.844 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.techdoc.techdocui.TechDocUiApplication for test class com.techdoc.techdocui.TechDocUiApplicationTests
+  <testcase name="contextLoads()" classname="com.techdoc.techdocui.TechDocUiApplicationTests" time="1.013"/>
+  <system-out><![CDATA[01:00:21.897 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.techdoc.techdocui.TechDocUiApplicationTests]: TechDocUiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:00:22.071 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.techdoc.techdocui.TechDocUiApplication for test class com.techdoc.techdocui.TechDocUiApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,10 +14,10 @@
 
  :: Spring Boot ::                (v3.4.5)
 
-2025-05-13T00:41:49.943-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Starting TechDocUiApplicationTests using Java 21.0.7 with PID 20268 (started by Usuario in D:\TechDocUI)
-2025-05-13T00:41:49.946-05:00 DEBUG 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Running with Spring Boot v3.4.5, Spring v6.2.6
-2025-05-13T00:41:49.953-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2025-05-13T00:41:53.113-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Started TechDocUiApplicationTests in 3.887 seconds (process running for 6.471)
+2025-05-13T01:00:22.846-05:00  INFO 12040 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Starting TechDocUiApplicationTests using Java 21.0.7 with PID 12040 (started by Usuario in D:\TechDocUI)
+2025-05-13T01:00:22.849-05:00 DEBUG 12040 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-13T01:00:22.852-05:00  INFO 12040 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2025-05-13T01:00:25.327-05:00  INFO 12040 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Started TechDocUiApplicationTests in 2.927 seconds (process running for 4.843)
 ]]></system-out>
   <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.15.11\a38b16385e867f59a641330f0362ebe742788ed8\byte-buddy-agent-1.15.11.jar)
