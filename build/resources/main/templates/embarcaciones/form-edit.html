@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Editar Embarcación</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <style>
+    /* Usa los mismos estilos que ya colocaste, puedes copiar/pegar todo tu bloque <style> aquí */
+    /* ... tu bloque de estilos completo ... */
+  </style>
+</head>
+<body>
+<main id="main-content">
+  <div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+  </div>
+
+  <div class="header-section">
+    <h1>Editar Embarcación</h1>
+    <div class="actions-group">
+      <a th:href="@{/embarcaciones/detalle/{id}(id=${embarcacionId})}" class="btn btn-secondary">Volver al Detalle</a>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p>Está editando la embarcación con ID: <strong th:text="${embarcacionId}"></strong></p>
+  </div>
+
+  <div class="form-container">
+    <form th:action="@{/embarcaciones/{id}/actualizar(id=${embarcacionId})}" method="post" th:object="${embarcacion}">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" th:field="*{nombre}" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="numeroMatricula" class="form-label">Número de Matrícula</label>
+          <input type="text" id="numeroMatricula" th:field="*{numeroMatricula}" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo" class="form-label">Tipo</label>
+          <input type="text" id="tipo" th:field="*{tipo}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" th:field="*{estado}" class="form-select">
+            <option value="">Seleccionar estado</option>
+            <option value="OPERATIVA">Operativa</option>
+            <option value="EN_MANTENIMIENTO">En Mantenimiento</option>
+            <option value="FUERA_DE_SERVICIO">Fuera de Servicio</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="capacidad" class="form-label">Capacidad (personas)</label>
+          <input type="number" id="capacidad" th:field="*{capacidad}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="puertoBase" class="form-label">Puerto Base</label>
+          <input type="text" id="puertoBase" th:field="*{puertoBase}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="fechaConstruccion" class="form-label">Fecha de Construcción</label>
+          <input type="date" id="fechaConstruccion" th:field="*{fechaConstruccion}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="ultimoMantenimiento" class="form-label">Último Mantenimiento</label>
+          <input type="date" id="ultimoMantenimiento" th:field="*{ultimoMantenimiento}" class="form-input">
+        </div>
+
+        <div class="form-group" style="grid-column: span 2;">
+          <label for="observaciones" class="form-label">Observaciones</label>
+          <textarea id="observaciones" th:field="*{observaciones}" class="form-input" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-warning">Actualizar Embarcación</button>
+        <a th:href="@{/embarcaciones/detalle/{id}(id=${embarcacionId})}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      gsap.to('#main-content', {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out'
+      });
+
+      const formGroups = document.querySelectorAll('.form-group');
+      gsap.set(formGroups, { opacity: 0, y: 20 });
+
+      gsap.to(formGroups, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out',
+          delay: 0.3
+      });
+  });
+</script>
+</body>
+</html>

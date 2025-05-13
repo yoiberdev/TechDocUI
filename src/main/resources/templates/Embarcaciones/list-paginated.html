@@ -4,10 +4,8 @@
   <title>Lista de Embarcaciones</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Librerias -->
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-
   <link rel="stylesheet" th:href="@{/css/listado.css}">
   <link rel="icon" type="image/svg+xml" href="/favicon-techdoc.png">
 </head>
@@ -20,16 +18,13 @@
   <div class="header-section">
     <h1>Lista Paginada de Embarcaciones</h1>
     <div class="actions-group">
-      <a href="/embarcaciones/nuevo" class="btn btn-primary">Crear Nuevo Embarcacion</a>
+      <a href="/embarcaciones/nuevo" class="btn btn-primary">Crear Nueva Embarcación</a>
       <a href="/embarcaciones" class="btn btn-secondary">Vista Simple</a>
     </div>
   </div>
 
   <div class="filter-section">
-    <form id="filterForm"
-          th:action="@{/embarcaciones}"
-          method="get"
-          class="filter-form">
+    <form id="filterForm" th:action="@{/Embarcaciones/paginados}" method="get" class="filter-form">
       <div class="filter-group">
         <label for="pageSize">Elementos por página:</label>
         <select id="pageSize" name="size">
@@ -44,7 +39,7 @@
         <select id="sortBy" name="sortBy">
           <option value="id" th:selected="${sortBy == 'id'}">ID</option>
           <option value="nombre" th:selected="${sortBy == 'nombre'}">Nombre</option>
-          <option value="numeroSerie" th:selected="${sortBy == 'numeroSerie'}">Número de Serie</option>
+          <option value="matricula" th:selected="${sortBy == 'matricula'}">Matrícula</option>
           <option value="estado" th:selected="${sortBy == 'estado'}">Estado</option>
         </select>
       </div>
@@ -64,44 +59,46 @@
     <table>
       <thead>
       <tr>
-        <th class="sortable" data-sort="id">ID</th>
-        <th class="sortable" data-sort="nombre">Nombre</th>
-        <th class="sortable" data-sort="numeroSerie">Número de Serie</th>
-        <th>Ubicación</th>
-        <th class="sortable" data-sort="estado">Estado</th>
-        <Sistemath>Embarcación</Sistemath>
-        <th>Tipo de </th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Matrícula</th>
+        <th>Tipo</th>
+        <th>Empresa Propietaria</th>
+        <th>Capacidad de Carga</th>
+        <th>Fecha de Construcción</th>
+        <th>Estado</th>
+        <th>Ubicación Actual</th>
         <th>Acciones</th>
       </tr>
       </thead>
-      <tbody th:if="${sistemas != null and !sistemas.isEmpty()}">
-      <tr th:each="sistema : ${sistemas}">
-        <td th:text="${sistema.id}"></td>
-        <td th:text="${sistema.nombre}"></td>
-        <td th:text="${sistema.numeroSerie}"></td>
-        <td th:text="${sistema.ubicacionEnEmbarcacion}"></td>
+      <tbody th:if="${embarcaciones != null and !embarcaciones.isEmpty()}">
+      <tr th:each="embarcacion : ${embarcaciones}">
+        <td th:text="${embarcacion.id}">1</td>
+        <td th:text="${embarcacion.nombre}">Nombre</td>
+        <td th:text="${embarcacion.matricula}">ABC123</td>
+        <td th:text="${embarcacion.tipoEmbarcacion}">Tipo</td>
+        <td th:text="${embarcacion.empresaPropietaria}">Empresa</td>
+        <td th:text="${embarcacion.capacidadCarga} + ' toneladas'">0</td>
+        <td th:text="${embarcacion.fechaConstruccion}">2023-01-01</td>
         <td>
-                        <span th:class="'estado-badge ' +
-                            ${sistema.estado == 'OPERATIVO' ? 'estado-operativo' :
-                             sistema.estado == 'FALLA' ? 'estado-falla' :
-                             sistema.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
-                             'estado-desactivado'}"
-                              th:text="${sistema.estado}">
-                        </span>
+            <span th:class="'estado-badge ' +
+              ${embarcacion.estado == 'OPERATIVO' ? 'estado-operativo' :
+              embarcacion.estado == 'FALLA' ? 'estado-falla' :
+              embarcacion.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
+              'estado-desactivado'}"
+                  th:text="${embarcacion.estado}">
+            </span>
         </td>
-        <td th:text="${sistema.idEmbarcacion}"></td>
-        <td th:text="${sistema.idTipoSistema}"></td>
+        <td th:text="${embarcacion.ubicacionActual}">Puerto</td>
         <td class="actions-cell">
-          <a th:href="@{/embarcaciones/detalle/{id}(id=${sistema.id})}">Ver detalle</a>
-          <a th:href="@{/embarcaciones/{id}/editar(id=${sistema.id})}">Editar</a>
+          <a th:href="@{/embarcaciones/detalle/{id}(id=${embarcacion.id})}">Ver detalle</a>
+          <a th:href="@{/embarcaciones/{id}/editar(id=${embarcacion.id})}">Editar</a>
         </td>
       </tr>
       </tbody>
       <tbody th:if="${embarcaciones == null or embarcaciones.isEmpty()}">
       <tr>
-        <td colspan="8" class="no-data">
-          No se encontraron embarcaciones
-        </td>
+        <td colspan="10" class="no-data">No se encontraron embarcaciones</td>
       </tr>
       </tbody>
     </table>
@@ -109,65 +106,52 @@
 
   <div class="pagination" th:if="${totalPages > 1}">
     <a th:href="@{/embarcaciones/paginados(page=0, size=${pageSize}, sortBy=${param.sortBy}, direction=${param.direction})}"
-       th:class="'page-link ' + ${currentPage == 0 ? 'disabled' : ''}">
-      Primera
-    </a>
+       th:class="'page-link ' + ${currentPage == 0 ? 'disabled' : ''}">Primera</a>
 
     <a th:href="@{/embarcaciones/paginados(page=${currentPage - 1}, size=${pageSize}, sortBy=${param.sortBy}, direction=${param.direction})}"
-       th:class="'page-link ' + ${currentPage == 0 ? 'disabled' : ''}">
-      Anterior
-    </a>
+       th:class="'page-link ' + ${currentPage == 0 ? 'disabled' : ''}">Anterior</a>
 
     <span class="pagination-info">
-            Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span>
-            (Total: <span th:text="${totalElements}"></span> elementos)
-        </span>
+      Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span>
+      (Total: <span th:text="${totalElements}"></span> elementos)
+    </span>
 
     <a th:href="@{/embarcaciones/paginados(page=${currentPage + 1}, size=${pageSize}, sortBy=${param.sortBy}, direction=${param.direction})}"
-       th:class="'page-link ' + ${currentPage + 1 >= totalPages ? 'disabled' : ''}">
-      Siguiente
-    </a>
+       th:class="'page-link ' + ${currentPage + 1 >= totalPages ? 'disabled' : ''}">Siguiente</a>
 
     <a th:href="@{/embarcaciones/paginados(page=${totalPages - 1}, size=${pageSize}, sortBy=${param.sortBy}, direction=${param.direction})}"
-       th:class="'page-link ' + ${currentPage + 1 >= totalPages ? 'disabled' : ''}">
-      Última
-    </a>
+       th:class="'page-link ' + ${currentPage + 1 >= totalPages ? 'disabled' : ''}">Última</a>
   </div>
 </main>
 
 <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js"></script>
 <script>
-  // Animación de entrada para el contenedor principal
   document.addEventListener('DOMContentLoaded', () => {
-      gsap.to('#main-content', {
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out'
-      });
+    gsap.to('#main-content', {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
 
-      // Manejo del formulario de filtros
-      const filterForm = document.getElementById('filterForm');
-      filterForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const formData = new FormData(filterForm);
-          const params = new URLSearchParams();
-          params.append('page', '0'); // Resetear a la primera página
-          formData.forEach((value, key) => params.append(key, value));
-          window.location.href = '/sistemas/paginados?' + params.toString();
-      });
+    const filterForm = document.getElementById('filterForm');
+    filterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(filterForm);
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => params.append(key, value));
+      window.location.href = '/embarcaciones/paginados?' + params.toString();
+    });
 
-      // Animación para las filas de la tabla
-      const rows = document.querySelectorAll('tbody tr');
-      gsap.set(rows, { opacity: 0, x: -20 });
-
-      gsap.to(rows, {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: 0.05,
-          ease: 'power2.out',
-          delay: 0.3
-      });
+    const rows = document.querySelectorAll('tbody tr');
+    gsap.set(rows, { opacity: 0, x: -20 });
+    gsap.to(rows, {
+      opacity: 1,
+      x: 0,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'power2.out',
+      delay: 0.3
+    });
   });
 </script>
 </body>

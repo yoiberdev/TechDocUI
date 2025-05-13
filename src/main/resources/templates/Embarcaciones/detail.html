@@ -286,7 +286,7 @@
     <div class="delete-warning">
       <p><strong>Advertencia:</strong> Eliminar este Embarcacion es una acción irreversible.</p>
     </div>
-    <form th:action="@{/embarcacion/{id}/eliminar(id=${embarcacion.id})}" method="post" style="display: inline;">
+    <form th:action="@{/embarcaciones/{id}/eliminar(id=${embarcacion.id})}" method="post" style="display: inline;">
       <button type="submit" class="btn btn-danger"
               onclick="return confirm('¿Está seguro de que desea eliminar este embarcacion?')">
         Eliminar Embarcacion
