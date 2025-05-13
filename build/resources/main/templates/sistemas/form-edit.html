@@ -219,49 +219,77 @@
     <div class="form-container">
         <form th:action="@{/sistemas/{id}/actualizar(id=${sistemaId})}" method="post" th:object="${sistema}">
             <div class="form-grid">
+                <!-- EXISTENTES -->
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre del Sistema</label>
-                    <input type="text"
-                           id="nombre"
-                           name="nombre"
-                           th:field="*{nombre}"
-                           class="form-input"
-                           required>
+                    <input type="text" id="nombre" th:field="*{nombre}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
                     <label for="numeroSerie" class="form-label">Número de Serie</label>
-                    <input type="text"
-                           id="numeroSerie"
-                           name="numeroSerie"
-                           th:field="*{numeroSerie}"
-                           class="form-input"
-                           required>
+                    <input type="text" id="numeroSerie" th:field="*{numeroSerie}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
                     <label for="ubicacionEnEmbarcacion" class="form-label">Ubicación en Embarcación</label>
-                    <input type="text"
-                           id="ubicacionEnEmbarcacion"
-                           name="ubicacionEnEmbarcacion"
-                           th:field="*{ubicacionEnEmbarcacion}"
-                           class="form-input"
-                           required>
+                    <input type="text" id="ubicacionEnEmbarcacion" th:field="*{ubicacionEnEmbarcacion}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
                     <label for="estado" class="form-label">Estado</label>
-                    <select id="estado"
-                            name="estado"
-                            th:field="*{estado}"
-                            class="form-select"
-                            required>
+                    <select id="estado" th:field="*{estado}" class="form-select" required>
                         <option value="">Seleccionar estado</option>
                         <option value="OPERATIVO">Operativo</option>
                         <option value="FALLA">Falla</option>
                         <option value="MANTENIMIENTO">Mantenimiento</option>
                         <option value="DESACTIVADO">Desactivado</option>
                     </select>
+                </div>
+
+                <!-- NUEVOS CAMPOS -->
+                <div class="form-group">
+                    <label for="idEmbarcacion" class="form-label">ID Embarcación</label>
+                    <input type="number" id="idEmbarcacion" th:field="*{idEmbarcacion}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="idTipoSistema" class="form-label">ID Tipo de Sistema</label>
+                    <input type="number" id="idTipoSistema" th:field="*{idTipoSistema}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaInstalacion" class="form-label">Fecha Instalación</label>
+                    <input type="date" id="fechaInstalacion" th:field="*{fechaInstalacion}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaUltimaRevision" class="form-label">Fecha Última Revisión</label>
+                    <input type="date" id="fechaUltimaRevision" th:field="*{fechaUltimaRevision}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaProximoMantenimiento" class="form-label">Fecha Próximo Mantenimiento</label>
+                    <input type="date" id="fechaProximoMantenimiento" th:field="*{fechaProximoMantenimiento}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="tiempoVidaRestante" class="form-label">Tiempo Vida Restante (días)</label>
+                    <input type="number" id="tiempoVidaRestante" th:field="*{tiempoVidaRestante}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="tecnicoInstalador" class="form-label">Técnico Instalador</label>
+                    <input type="text" id="tecnicoInstalador" th:field="*{tecnicoInstalador}" class="form-input">
+                </div>
+
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="notasInstalacion" class="form-label">Notas de Instalación</label>
+                    <textarea id="notasInstalacion" th:field="*{notasInstalacion}" class="form-input" rows="3"></textarea>
+                </div>
+
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="diagramaUbicacion" class="form-label">URL Diagrama de Ubicación</label>
+                    <input type="text" id="diagramaUbicacion" th:field="*{diagramaUbicacion}" class="form-input">
                 </div>
             </div>
 

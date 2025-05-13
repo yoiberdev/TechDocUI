@@ -184,6 +184,37 @@
                 width: 100%;
             }
         }
+
+        /* Estilo para los selects mejorados */
+        .select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            font-size: 12px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .form-select option {
+            padding: 10px;
+        }
+
+        /* Estilo para destacar campos requeridos */
+        .required-field::after {
+            content: ' *';
+            color: var(--danger-color);
+        }
     </style>
 </head>
 <body>
@@ -203,17 +234,17 @@
         <form th:action="@{/sistemas}" method="post" th:object="${sistema}">
             <div class="form-grid">
                 <div class="form-group">
-                    <label class="form-label" th:for="*{nombre}">Nombre del Sistema</label>
+                    <label class="form-label required-field" th:for="*{nombre}">Nombre del Sistema</label>
                     <input type="text" th:field="*{nombre}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{numeroSerie}">Número de Serie</label>
+                    <label class="form-label required-field" th:for="*{numeroSerie}">Número de Serie</label>
                     <input type="text" th:field="*{numeroSerie}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{fechaInstalacion}">Fecha de Instalación</label>
+                    <label class="form-label required-field" th:for="*{fechaInstalacion}">Fecha de Instalación</label>
                     <input type="date" th:field="*{fechaInstalacion}" class="form-input" required>
                 </div>
 
@@ -248,29 +279,47 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{ubicacionEnEmbarcacion}">Ubicación en Embarcación</label>
+                    <label class="form-label required-field" th:for="*{ubicacionEnEmbarcacion}">Ubicación en Embarcación</label>
                     <input type="text" th:field="*{ubicacionEnEmbarcacion}" class="form-input" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{estado}">Estado</label>
-                    <select th:field="*{estado}" class="form-select" required>
-                        <option value="">Seleccionar estado</option>
-                        <option value="OPERATIVO">Operativo</option>
-                        <option value="FALLA">Falla</option>
-                        <option value="MANTENIMIENTO">Mantenimiento</option>
-                        <option value="DESACTIVADO">Desactivado</option>
-                    </select>
+                    <label class="form-label required-field" th:for="*{estado}">Estado</label>
+                    <div class="select-wrapper">
+                        <select th:field="*{estado}" class="form-select" required>
+                            <option value="">Seleccionar estado</option>
+                            <option value="OPERATIVO">Operativo</option>
+                            <option value="FALLA">Falla</option>
+                            <option value="MANTENIMIENTO">Mantenimiento</option>
+                            <option value="DESACTIVADO">Desactivado</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{idEmbarcacion}">ID Embarcación</label>
-                    <input type="number" th:field="*{idEmbarcacion}" class="form-input" required>
+                    <label class="form-label required-field" th:for="*{idEmbarcacion}">Embarcación</label>
+                    <div class="select-wrapper">
+                        <select th:field="*{idEmbarcacion}" class="form-select" required>
+                            <option value="">Seleccionar embarcación</option>
+                            <option th:each="embarcacion : ${embarcaciones}"
+                                    th:value="${embarcacion.id}"
+                                    th:text="${embarcacion.nombre}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" th:for="*{idTipoSistema}">ID Tipo de Sistema</label>
-                    <input type="number" th:field="*{idTipoSistema}" class="form-input" required>
+                    <label class="form-label required-field" th:for="*{idTipoSistema}">Tipo de Sistema</label>
+                    <div class="select-wrapper">
+                        <select th:field="*{idTipoSistema}" class="form-select" required>
+                            <option value="">Seleccionar tipo de sistema</option>
+                            <option th:each="tipoSistema : ${tiposSistema}"
+                                    th:value="${tipoSistema.id}"
+                                    th:text="${tipoSistema.nombre}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
 

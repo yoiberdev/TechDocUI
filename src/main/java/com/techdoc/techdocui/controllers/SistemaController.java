@@ -4,7 +4,11 @@ import com.techdoc.techdocui.dto.CreateSistemaRequest;
 import com.techdoc.techdocui.dto.PaginatedResponse;
 import com.techdoc.techdocui.dto.UpdateSistemaRequest;
 import com.techdoc.techdocui.models.Sistema;
+import com.techdoc.techdocui.models.Embarcacion;
+import com.techdoc.techdocui.models.TipoSistema;
 import com.techdoc.techdocui.service.SistemaService;
+import com.techdoc.techdocui.service.EmbarcacionService;
+import com.techdoc.techdocui.service.TipoSistemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,12 @@ public class SistemaController {
 
     @Autowired
     private SistemaService sistemaService;
+
+    @Autowired
+    private EmbarcacionService embarcacionService;
+
+    @Autowired
+    private TipoSistemaService tipoSistemaService;
 
     @GetMapping
     public String listarSistemasPaginados(
@@ -51,18 +61,30 @@ public class SistemaController {
         return listarSistemasPaginados(page, size, sortBy, direction, model);
     }
 
-    // 🚨 Cambiado para evitar colisión
     @GetMapping("/detalle/{id}")
     public String verSistema(@PathVariable Long id, Model model) {
         try {
             Sistema sistema = sistemaService.obtenerSistemaPorId(id);
             model.addAttribute("sistema", sistema);
+
+            // Agregamos información de la embarcación y tipo de sistema para mostrar nombres
+            if (sistema.getIdEmbarcacion() != null) {
+                Embarcacion embarcacion = embarcacionService.obtenerEmbarcacionPorId(sistema.getIdEmbarcacion());
+                model.addAttribute("nombreEmbarcacion", embarcacion.getNombre());
+            }
+
+            if (sistema.getIdTipoSistema() != null) {
+                TipoSistema tipoSistema = tipoSistemaService.obtenerTipoSistemaPorId(sistema.getIdTipoSistema());
+                model.addAttribute("nombreTipoSistema", tipoSistema.getNombre());
+            }
+
             return "sistemas/detail";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el sistema: " + e.getMessage());
             return "sistemas/detail";
         }
     }
+
     @ModelAttribute("sistema")
     public CreateSistemaRequest sistemaForm() {
         return new CreateSistemaRequest();
@@ -73,9 +95,16 @@ public class SistemaController {
         CreateSistemaRequest request = new CreateSistemaRequest();
         System.out.println("DEBUG: creando CreateSistemaRequest vacío");
         model.addAttribute("sistema", request);
+
+        // Obtener listados de embarcaciones y tipos de sistemas
+        List<Embarcacion> embarcaciones = embarcacionService.obtenerTodasLasEmbarcaciones();
+        List<TipoSistema> tiposSistema = tipoSistemaService.obtenerTodosTiposSistema();
+
+        model.addAttribute("embarcaciones", embarcaciones);
+        model.addAttribute("tiposSistema", tiposSistema);
+
         return "sistemas/form-create";
     }
-
 
     @PostMapping
     public String crearSistema(@ModelAttribute CreateSistemaRequest request,
@@ -111,6 +140,14 @@ public class SistemaController {
 
             model.addAttribute("sistema", request);
             model.addAttribute("sistemaId", id);
+
+            // Obtener listados de embarcaciones y tipos de sistemas
+            List<Embarcacion> embarcaciones = embarcacionService.obtenerTodasLasEmbarcaciones();
+            List<TipoSistema> tiposSistema = tipoSistemaService.obtenerTodosTiposSistema();
+
+            model.addAttribute("embarcaciones", embarcaciones);
+            model.addAttribute("tiposSistema", tiposSistema);
+
             return "sistemas/form-edit";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el sistema: " + e.getMessage());
@@ -149,8 +186,9 @@ public class SistemaController {
     public String listarSistemasPorEmbarcacion(@PathVariable Long idEmbarcacion, Model model) {
         try {
             List<Sistema> sistemas = sistemaService.obtenerSistemasPorEmbarcacion(idEmbarcacion);
+            Embarcacion embarcacion = embarcacionService.obtenerEmbarcacionPorId(idEmbarcacion);
             model.addAttribute("sistemas", sistemas);
-            model.addAttribute("criterio", "Embarcación ID: " + idEmbarcacion);
+            model.addAttribute("criterio", "Embarcación: " + embarcacion.getNombre());
             return "sistemas/list-filtered";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los sistemas: " + e.getMessage());
@@ -162,8 +200,9 @@ public class SistemaController {
     public String listarSistemasPorTipo(@PathVariable Long idTipoSistema, Model model) {
         try {
             List<Sistema> sistemas = sistemaService.obtenerSistemasPorTipoSistema(idTipoSistema);
+            TipoSistema tipoSistema = tipoSistemaService.obtenerTipoSistemaPorId(idTipoSistema);
             model.addAttribute("sistemas", sistemas);
-            model.addAttribute("criterio", "Tipo de Sistema ID: " + idTipoSistema);
+            model.addAttribute("criterio", "Tipo de Sistema: " + tipoSistema.getNombre());
             return "sistemas/list-filtered";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los sistemas: " + e.getMessage());

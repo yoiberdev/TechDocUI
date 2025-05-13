@@ -231,6 +231,11 @@
             </div>
 
             <div class="detail-item">
+                <div class="detail-label">Fecha Instalación</div>
+                <div class="detail-value" th:text="${sistema.fechaInstalacion}"></div>
+            </div>
+
+            <div class="detail-item">
                 <div class="detail-label">Ubicación en Embarcación</div>
                 <div class="detail-value" th:text="${sistema.ubicacionEnEmbarcacion}"></div>
             </div>
@@ -238,13 +243,45 @@
             <div class="detail-item">
                 <div class="detail-label">Estado</div>
                 <div class="detail-value">
-                    <span th:class="'estado-badge ' +
-                        ${sistema.estado == 'OPERATIVO' ? 'estado-operativo' :
-                         sistema.estado == 'FALLA' ? 'estado-falla' :
-                         sistema.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
-                         'estado-desactivado'}"
-                          th:text="${sistema.estado}">
-                    </span>
+                <span th:class="'estado-badge ' +
+                    ${sistema.estado == 'OPERATIVO' ? 'estado-operativo' :
+                     sistema.estado == 'FALLA' ? 'estado-falla' :
+                     sistema.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
+                     'estado-desactivado'}"
+                      th:text="${sistema.estado}">
+                </span>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Fecha Última Revisión</div>
+                <div class="detail-value" th:text="${sistema.fechaUltimaRevision}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Fecha Próximo Mantenimiento</div>
+                <div class="detail-value" th:text="${sistema.fechaProximoMantenimiento}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Tiempo Vida Restante (días)</div>
+                <div class="detail-value" th:text="${sistema.tiempoVidaRestante}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Técnico Instalador</div>
+                <div class="detail-value" th:text="${sistema.tecnicoInstalador}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Notas de Instalación</div>
+                <div class="detail-value" th:text="${sistema.notasInstalacion}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Diagrama Ubicación</div>
+                <div class="detail-value">
+                    <a th:href="@{${sistema.diagramaUbicacion}}" th:text="${sistema.diagramaUbicacion}"></a>
                 </div>
             </div>
 
@@ -254,13 +291,18 @@
             </div>
 
             <div class="detail-item">
-                <div class="detail-label">ID Tipo de Sistema</div>
+                <div class="detail-label">ID Tipo Sistema</div>
                 <div class="detail-value" th:text="${sistema.idTipoSistema}"></div>
             </div>
 
             <div class="detail-item">
-                <div class="detail-label">Requiere Mantenimiento</div>
-                <div class="detail-value" th:text="${sistema.requiereMantenimiento ? 'Sí' : 'No'}"></div>
+                <div class="detail-label">Creado</div>
+                <div class="detail-value" th:text="${sistema.createdAt}"></div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Actualizado</div>
+                <div class="detail-value" th:text="${sistema.updatedAt}"></div>
             </div>
         </div>
     </div>
