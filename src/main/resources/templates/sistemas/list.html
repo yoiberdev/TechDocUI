@@ -323,7 +323,7 @@
                 <td th:text="${sistema.idEmbarcacion}"></td>
                 <td th:text="${sistema.idTipoSistema}"></td>
                 <td class="actions-cell">
-                    <a th:href="@{/sistemas/{id}(id=${sistema.id})}">Ver</a>
+                    <a th:href="@{/sistemas/detalle/{id}(id=${sistema.id})}">Ver detalle</a>
                     <a th:href="@{/sistemas/{id}/editar(id=${sistema.id})}">Editar</a>
                 </td>
             </tr>
