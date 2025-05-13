@@ -41,6 +41,16 @@ public class SistemaController {
         }
     }
 
+    @GetMapping("/paginados")
+    public String listarSistemasPaginadosV2(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "ASC") String direction,
+            Model model) {
+        return listarSistemasPaginados(page, size, sortBy, direction, model);
+    }
+
     // 🚨 Cambiado para evitar colisión
     @GetMapping("/detalle/{id}")
     public String verSistema(@PathVariable Long id, Model model) {
