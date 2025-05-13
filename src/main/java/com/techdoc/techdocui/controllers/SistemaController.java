@@ -73,7 +73,7 @@ public class SistemaController {
         try {
             Sistema sistema = sistemaService.crearSistema(request);
             redirectAttributes.addFlashAttribute("mensaje", "Sistema creado exitosamente");
-            return "redirect:/sistemas/detail/" + sistema.getId();
+            return "redirect:/sistemas/detalle/" + sistema.getId();
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al crear el sistema: " + e.getMessage());
             return "redirect:/sistemas/nuevo";
