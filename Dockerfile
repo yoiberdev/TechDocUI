@@ -1,33 +1,33 @@
 # Etapa 1: Construcción con Gradle
 FROM gradle:8.5-jdk21 AS build
 
-# Copiar el código fuente
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiamos los archivos gradle necesarios primero para aprovechar cache
-COPY build.gradle.kts settings.gradle.kts ./
+# Copia los archivos de configuración primero para aprovechar cache de dependencias
+COPY build.gradle settings.gradle ./
 COPY gradle ./gradle
 COPY gradlew ./
 
-# Descargar dependencias (opcional, útil para caché)
-RUN ./gradlew dependencies
+# Descarga de dependencias (útil para cache en builds posteriores)
+RUN ./gradlew build --no-daemon || return 0
 
-# Copiar el resto del código
+# Copia el código fuente del proyecto
 COPY src ./src
 
-# Compilar el proyecto y generar el jar
-RUN ./gradlew clean bootJar --no-daemon
+# Compila el proyecto y genera el .jar
+RUN ./gradlew clean build --no-daemon
 
-# Etapa 2: Imagen final para ejecutar
+# Etapa 2: Imagen final para ejecutar el JAR
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# Copiar el jar desde la etapa de build
+# Copia el JAR compilado desde el build stage
 COPY --from=build /app/build/libs/*.jar app.jar
 
-# Exponer el puerto que usa tu app
+# Exponer puerto (ajústalo si usas otro)
 EXPOSE 8080
 
-# Comando para ejecutar el jar
+# Comando por defecto al iniciar el contenedor
 CMD ["java", "-jar", "app.jar"]
