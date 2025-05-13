@@ -68,8 +68,8 @@
                               th:text="${sistema.estado}">
                         </span>
                 </td>
-                <td th:text="${sistema.idEmbarcacion}"></td>
-                <td th:text="${sistema.idTipoSistema}"></td>
+                <td th:text="${sistema.nombreEmbarcacion}">Embarcación</td>
+                <td th:text="${sistema.nombreTipoSistema}">Tipo de Sistema</td>
                 <td class="actions-cell">
                     <a th:href="@{/sistemas/detalle/{id}(id=${sistema.id})}">Ver detalle</a>
                     <a th:href="@{/sistemas/{id}/editar(id=${sistema.id})}">Editar</a>
