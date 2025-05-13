@@ -1,15 +1,30 @@
+# Etapa 1: Construcción
 FROM gradle:8.5-jdk21 AS build
 
 WORKDIR /app
 
-# Copiar los archivos esenciales para la construcción (incluyendo el wrapper)
-COPY build.gradle settings.gradle ./
+# Copia los archivos necesarios para construir el JAR
+COPY gradlew .
 COPY gradle ./gradle
-COPY gradlew ./
-RUN chmod +x gradlew
-
-# Copiar el código fuente
+COPY build.gradle settings.gradle ./
 COPY src ./src
 
-# Compilar
-RUN ./gradlew clean build --no-daemon
+# Asegura permisos de ejecución
+RUN chmod +x gradlew
+
+# Construye el archivo .jar
+RUN ./gradlew bootJar --no-daemon
+
+# Etapa 2: Imagen final, ligera
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+# Copia el jar compilado desde la etapa de build
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Expone el puerto de la app
+EXPOSE 8080
+
+# Comando para ejecutar la app
+CMD ["java", "-jar", "app.jar"]

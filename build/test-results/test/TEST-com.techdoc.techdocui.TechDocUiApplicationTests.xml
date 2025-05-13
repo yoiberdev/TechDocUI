@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.techdoc.techdocui.TechDocUiApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-13T05:41:53.141Z" hostname="ASUS" time="1.209">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.techdoc.techdocui.TechDocUiApplicationTests" time="1.209"/>
+  <system-out><![CDATA[00:41:48.630 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.techdoc.techdocui.TechDocUiApplicationTests]: TechDocUiApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:41:48.844 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.techdoc.techdocui.TechDocUiApplication for test class com.techdoc.techdocui.TechDocUiApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2025-05-13T00:41:49.943-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Starting TechDocUiApplicationTests using Java 21.0.7 with PID 20268 (started by Usuario in D:\TechDocUI)
+2025-05-13T00:41:49.946-05:00 DEBUG 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-13T00:41:49.953-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2025-05-13T00:41:53.113-05:00  INFO 20268 --- [TechDocUI] [    Test worker] c.t.techdocui.TechDocUiApplicationTests  : Started TechDocUiApplicationTests in 3.887 seconds (process running for 6.471)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.15.11\a38b16385e867f59a641330f0362ebe742788ed8\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
