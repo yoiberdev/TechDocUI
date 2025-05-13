@@ -89,6 +89,15 @@ public class SistemaController {
             request.setNumeroSerie(sistema.getNumeroSerie());
             request.setUbicacionEnEmbarcacion(sistema.getUbicacionEnEmbarcacion());
             request.setEstado(sistema.getEstado());
+            request.setIdEmbarcacion(sistema.getIdEmbarcacion());
+            request.setIdTipoSistema(sistema.getIdTipoSistema());
+            request.setFechaInstalacion(sistema.getFechaInstalacion());
+            request.setFechaUltimaRevision(sistema.getFechaUltimaRevision());
+            request.setFechaProximoMantenimiento(sistema.getFechaProximoMantenimiento());
+            request.setTiempoVidaRestante(sistema.getTiempoVidaRestante());
+            request.setTecnicoInstalador(sistema.getTecnicoInstalador());
+            request.setNotasInstalacion(sistema.getNotasInstalacion());
+            request.setDiagramaUbicacion(sistema.getDiagramaUbicacion());
 
             model.addAttribute("sistema", request);
             model.addAttribute("sistemaId", id);
@@ -106,7 +115,7 @@ public class SistemaController {
         try {
             sistemaService.actualizarSistema(id, request);
             redirectAttributes.addFlashAttribute("mensaje", "Sistema actualizado exitosamente");
-            return "redirect:/sistemas/detail/" + id;
+            return "redirect:/sistemas/detalle/" + id;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al actualizar el sistema: " + e.getMessage());
             return "redirect:/sistemas/" + id + "/editar";
@@ -122,7 +131,7 @@ public class SistemaController {
             return "redirect:/sistemas";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al eliminar el sistema: " + e.getMessage());
-            return "redirect:/sistemas/detail/" + id;
+            return "redirect:/sistemas/detalle/" + id;
         }
     }
 
