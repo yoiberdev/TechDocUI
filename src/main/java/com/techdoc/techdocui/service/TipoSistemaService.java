@@ -20,7 +20,7 @@ public class TipoSistemaService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${api.base.url=https://techdoc.yoiber.com/api}")
+    @Value("${api.base.url:https://techdoc.yoiber.com/api}")
     private String apiBaseUrl;
 
     private final String tipoSistemaEndpoint = "/tipos-sistema";

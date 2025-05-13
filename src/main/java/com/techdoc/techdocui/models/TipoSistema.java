@@ -5,6 +5,27 @@ import lombok.Data;
 @Data
 public class TipoSistema {
     private Long id;
+    private String nombre;
+    private String descripcion;
+    private String fabricanteRecomendado;
+    private String categoria;
+    private Integer vidaUtilEstimada;
+
+
+    // Constructores
+    public TipoSistema() {}
+
+    public TipoSistema(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public Long getId() {
         return id;
@@ -22,12 +43,12 @@ public class TipoSistema {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getFabricanteRecomendado() {
+        return fabricanteRecomendado;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setFabricanteRecomendado(String fabricanteRecomendado) {
+        this.fabricanteRecomendado = fabricanteRecomendado;
     }
 
     public String getCategoria() {
@@ -44,54 +65,5 @@ public class TipoSistema {
 
     public void setVidaUtilEstimada(Integer vidaUtilEstimada) {
         this.vidaUtilEstimada = vidaUtilEstimada;
-    }
-
-    public String getUnidadTiempo() {
-        return unidadTiempo;
-    }
-
-    public void setUnidadTiempo(String unidadTiempo) {
-        this.unidadTiempo = unidadTiempo;
-    }
-
-    public Integer getIntervaloMantenimiento() {
-        return intervaloMantenimiento;
-    }
-
-    public void setIntervaloMantenimiento(Integer intervaloMantenimiento) {
-        this.intervaloMantenimiento = intervaloMantenimiento;
-    }
-
-    public String getFabricante() {
-        return fabricante;
-    }
-
-    public void setFabricante(String fabricante) {
-        this.fabricante = fabricante;
-    }
-
-    public String getNotasTecnicas() {
-        return notasTecnicas;
-    }
-
-    public void setNotasTecnicas(String notasTecnicas) {
-        this.notasTecnicas = notasTecnicas;
-    }
-
-    private String nombre;
-    private String descripcion;
-    private String categoria;
-    private Integer vidaUtilEstimada;
-    private String unidadTiempo;
-    private Integer intervaloMantenimiento;
-    private String fabricante;
-    private String notasTecnicas;
-
-    // Constructores
-    public TipoSistema() {}
-
-    public TipoSistema(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
     }
 }
