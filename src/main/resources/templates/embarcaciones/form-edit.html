@@ -235,7 +235,7 @@
   </div>
 
   <div class="form-container">
-    <form th:action="@{/embarcaciones/{id}/actualizar(id=${embarcoId})}" method="post" th:object="${embarcoForm}">
+    <form th:action="@{/embarcaciones/{id}/actualizar(id=${embarcoId})}" method="post" th:object="${editForm}">
       <div class="form-grid">
         <div class="form-group">
           <label for="nombre" class="form-label required-field">Nombre</label>
