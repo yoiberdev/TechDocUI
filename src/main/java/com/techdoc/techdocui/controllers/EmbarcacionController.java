@@ -91,6 +91,8 @@ public class EmbarcacionController {
             request.setFechaConstruccion(embarcacion.getFechaConstruccion());
             request.setEstado(embarcacion.getEstado());
             request.setUbicacionActual(embarcacion.getUbicacionActual());
+            request.setNotas(embarcacion.getNotas());
+            request.setFechaRegistro(embarcacion.getFechaRegistro());
 
             model.addAttribute("embarcoForm", request);
             model.addAttribute("embarcoId", id);

@@ -231,7 +231,7 @@
   </div>
 
   <div class="form-container">
-    <form th:action="@{/embarcaciones}" method="post" th:object="${embarcacion}">
+    <form th:action="@{/embarcaciones}" method="post" th:object="${embarcoForm}">
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label required-field" th:for="*{nombre}">Nombre</label>
@@ -244,13 +244,23 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" th:for="*{tipo}">Tipo de Embarcación</label>
-          <input type="text" th:field="*{tipo}" class="form-input">
+          <label class="form-label" th:for="*{tipoEmbarcacion}">Tipo de Embarcación</label>
+          <input type="text" th:field="*{tipoEmbarcacion}" class="form-input">
         </div>
 
         <div class="form-group">
-          <label class="form-label" th:for="*{anioConstruccion}">Año de Construcción</label>
-          <input type="number" th:field="*{anioConstruccion}" class="form-input" min="1900" max="2100">
+          <label class="form-label" th:for="*{empresaPropietaria}">Empresa propietaria</label>
+          <input type="text" th:field="*{empresaPropietaria}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" th:for="*{capacidadCarga}">Capacidad Carga</label>
+          <input type="number" th:field="*{capacidadCarga}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" th:for="*{fechaConstruccion}">Año de Construcción</label>
+          <input type="date" th:field="*{fechaConstruccion}" class="form-input" min="1900" max="2100">
         </div>
 
         <div class="form-group">
@@ -258,8 +268,8 @@
           <div class="select-wrapper">
             <select th:field="*{estado}" class="form-select" required>
               <option value="">Seleccionar estado</option>
-              <option value="ACTIVA">Activa</option>
-              <option value="INACTIVA">Inactiva</option>
+              <option value="ACTIVO">Activa</option>
+              <option value="INACTIVO">Inactiva</option>
               <option value="MANTENIMIENTO">Mantenimiento</option>
             </select>
           </div>
@@ -269,6 +279,16 @@
           <label class="form-label" th:for="*{notas}">Notas</label>
           <textarea th:field="*{notas}" class="form-input"></textarea>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" th:for="*{ubicacionActual}">Ubicacion Actual</label>
+        <input type="text" th:field="*{ubicacionActual}" class="form-input" min="1900" max="2100">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" th:for="*{fechaRegistro}">Fecha Registro</label>
+        <input type="datetime-local" th:field="*{fechaRegistro}" class="form-input" min="1900" max="2100">
       </div>
 
       <div class="form-actions">

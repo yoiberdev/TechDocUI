@@ -9,7 +9,25 @@ import lombok.Data;
 public class Embarcacion {
     private Long id;
     private String nombre;
+    private String matricula;
+    private String tipoEmbarcacion;
+    private String empresaPropietaria;
+    private Double capacidadCarga;
+    private LocalDate fechaConstruccion;
+    private String estado;
+    private String ubicacionActual;
+    private String notas;
+    private LocalDateTime fechaRegistro;
 
+    // Constructores
+    public Embarcacion() {}
+
+    public Embarcacion(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    // Getters and Setters
     public String getMatricula() {
         return matricula;
     }
@@ -96,23 +114,5 @@ public class Embarcacion {
 
     public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
-    }
-
-    private String matricula;
-    private String tipoEmbarcacion;
-    private String empresaPropietaria;
-    private Double capacidadCarga;
-    private LocalDate fechaConstruccion;
-    private String estado;
-    private String ubicacionActual;
-    private String notas;
-    private LocalDateTime fechaRegistro;
-
-    // Constructores
-    public Embarcacion() {}
-
-    public Embarcacion(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
     }
 }
