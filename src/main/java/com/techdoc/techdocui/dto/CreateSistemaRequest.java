@@ -8,8 +8,11 @@ public class CreateSistemaRequest {
 
     private String nombre;
     private String numeroSerie;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInstalacion;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaUltimaRevision;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaProximoMantenimiento;
     private Integer tiempoVidaRestante;
     private String tecnicoInstalador;
