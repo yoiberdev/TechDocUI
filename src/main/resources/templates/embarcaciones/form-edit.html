@@ -235,41 +235,41 @@
   </div>
 
   <div class="form-container">
-    <form th:action="@{/embarcaciones/{id}/actualizar(id=${embarcacionId})}" method="post" th:object="${embarcacion}">
+    <form th:action="@{/embarcaciones/{id}/actualizar(id=${embarcoId})}" method="post" th:object="${embarcoForm}">
       <div class="form-grid">
         <div class="form-group">
-          <label for="nombre" class="form-label">Nombre</label>
+          <label for="nombre" class="form-label required-field">Nombre</label>
           <input type="text" id="nombre" th:field="*{nombre}" class="form-input" required>
         </div>
 
         <div class="form-group">
-          <label for="numeroMatricula" class="form-label">Número de Matrícula</label>
-          <input type="text" id="numeroMatricula" th:field="*{numeroMatricula}" class="form-input" required>
+          <label for="matricula" class="form-label required-field">Número de Matrícula</label>
+          <input type="text" id="matricula" th:field="*{matricula}" class="form-input" required>
         </div>
 
         <div class="form-group">
-          <label for="tipo" class="form-label">Tipo</label>
-          <input type="text" id="tipo" th:field="*{tipo}" class="form-input">
+          <label for="tipoEmbarcacion" class="form-label">Tipo</label>
+          <input type="text" id="tipoEmbarcacion" th:field="*{tipoEmbarcacion}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="empresaPropietaria" class="form-label">Empresa Propietaria</label>
+          <input type="text" id="empresaPropietaria" th:field="*{empresaPropietaria}" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="capacidadCarga" class="form-label">Capacidad de Carga</label>
+          <input type="number" step="0.01" id="capacidadCarga" th:field="*{capacidadCarga}" class="form-input">
         </div>
 
         <div class="form-group">
           <label for="estado" class="form-label">Estado</label>
           <select id="estado" th:field="*{estado}" class="form-select">
             <option value="">Seleccionar estado</option>
-            <option value="OPERATIVA">Operativa</option>
-            <option value="EN_MANTENIMIENTO">En Mantenimiento</option>
-            <option value="FUERA_DE_SERVICIO">Fuera de Servicio</option>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+            <option value="MANTENIMIENTO">En Mantenimiento</option>
           </select>
-        </div>
-
-        <div class="form-group">
-          <label for="capacidad" class="form-label">Capacidad (personas)</label>
-          <input type="number" id="capacidad" th:field="*{capacidad}" class="form-input">
-        </div>
-
-        <div class="form-group">
-          <label for="puertoBase" class="form-label">Puerto Base</label>
-          <input type="text" id="puertoBase" th:field="*{puertoBase}" class="form-input">
         </div>
 
         <div class="form-group">
@@ -278,13 +278,13 @@
         </div>
 
         <div class="form-group">
-          <label for="ultimoMantenimiento" class="form-label">Último Mantenimiento</label>
-          <input type="date" id="ultimoMantenimiento" th:field="*{ultimoMantenimiento}" class="form-input">
+          <label for="ubicacionActual" class="form-label">Ubicación Actual</label>
+          <input type="text" id="ubicacionActual" th:field="*{ubicacionActual}" class="form-input">
         </div>
 
         <div class="form-group" style="grid-column: span 2;">
-          <label for="observaciones" class="form-label">Observaciones</label>
-          <textarea id="observaciones" th:field="*{observaciones}" class="form-input" rows="3"></textarea>
+          <label for="notas" class="form-label">Notas</label>
+          <textarea id="notas" th:field="*{notas}" class="form-input" rows="3"></textarea>
         </div>
       </div>
 

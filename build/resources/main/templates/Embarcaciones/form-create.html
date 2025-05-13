@@ -231,7 +231,7 @@
   </div>
 
   <div class="form-container">
-    <form th:action="@{/embarcaciones}" method="post" th:object="${embarcacion}">
+    <form th:action="@{/embarcaciones}" method="post" th:object="${embarcoForm}">
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label required-field" th:for="*{nombre}">Nombre</label>
@@ -244,13 +244,13 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" th:for="*{tipo}">Tipo de Embarcación</label>
-          <input type="text" th:field="*{tipo}" class="form-input">
+          <label class="form-label" th:for="*{tipoEmbarcacion}">Tipo de Embarcación</label>
+          <input type="text" th:field="*{tipoEmbarcacion}" class="form-input">
         </div>
 
         <div class="form-group">
-          <label class="form-label" th:for="*{anioConstruccion}">Año de Construcción</label>
-          <input type="number" th:field="*{anioConstruccion}" class="form-input" min="1900" max="2100">
+          <label class="form-label" th:for="*{fechaConstruccion}">Año de Construcción</label>
+          <input type="number" th:field="*{fechaConstruccion}" class="form-input" min="1900" max="2100">
         </div>
 
         <div class="form-group">
