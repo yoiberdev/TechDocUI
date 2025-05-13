@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Listado de Embarcaciones</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <style>
+    :root {
+        --primary-color: #1a73e8;
+        --secondary-color: #f8f9fa;
+        --accent-color: #34a853;
+        --text-color: #202124;
+        --border-color: #dadce0;
+        --hover-color: #e8f0fe;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f7;
+        color: var(--text-color);
+        padding: 20px;
+    }
+
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+    }
+
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+    }
+
+    .error-message {
+        background-color: #fdeded;
+        border-left: 4px solid #d93025;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+    }
+
+    .sistema-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px var(--border-color);
+    }
+
+    .sistema-table thead {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    .sistema-table th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 500;
+    }
+
+    .sistema-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .sistema-table tbody tr {
+        background-color: white;
+        transition: background-color 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        cursor: pointer;
+    }
+
+    .sistema-table tbody tr:hover {
+        background-color: var(--hover-color);
+    }
+
+    .sistema-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .sistema-table a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .sistema-nombre {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .estado {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .estado-activo {
+        background-color: #e6f4ea;
+        color: #137333;
+    }
+
+    .estado-inactivo {
+        background-color: #fce8e6;
+        color: #c5221f;
+    }
+
+    .estado-mantenimiento {
+        background-color: #fef7e0;
+        color: #ea8600;
+    }
+
+    .search-container {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input {
+        flex-grow: 1;
+        border: none;
+        padding: 0.5rem;
+        font-size: 1rem;
+        outline: none;
+    }
+
+    .search-icon {
+        color: #5f6368;
+        margin-right: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        main {
+            padding: 1rem;
+        }
+
+        .sistema-table {
+            display: block;
+            overflow-x: auto;
+        }
+
+        .search-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+  </style>
+</head>
+<body>
+<main id="main-content">
+  <h1>Listado de Embarcaciones</h1>
+
+  <div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+  </div>
+
+  <div class="search-container">
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input type="text" id="searchInput" class="search-input" placeholder="Buscar embarcaciones...">
+  </div>
+
+  <table class="sistema-table">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Matrícula</th>
+      <th>Tipo</th>
+      <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${embarcaciones}"
+        th:data-nombre="${e.nombre}"
+        th:data-matricula="${e.matricula}"
+        th:data-tipo="${e.tipo}"
+        th:onclick="'window.location.href=\'/embarcaciones/' + ${e.id} + '\''">
+      <td>
+        <a th:href="@{/embarcaciones/{id}(id=${e.id})}"
+           class="sistema-nombre"
+           th:text="${e.nombre}"></a>
+      </td>
+      <td th:text="${e.matricula}"></td>
+      <td th:text="${e.tipo}"></td>
+      <td>
+                <span th:class="'estado ' +
+                    (${e.estado == 'Activo'} ? 'estado-activo' :
+                    (${e.estado == 'Inactivo'} ? 'estado-inactivo' : 'estado-mantenimiento'))"
+                      th:text="${e.estado}">
+                </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+
+<script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js"></script>
+<script>
+  // Reutiliza los mismos scripts que ya usabas
+  const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 2
+  });
+
+  function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  document.addEventListener('DOMContentLoaded', () => {
+      gsap.to('#main-content', {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out'
+      });
+
+      const rows = document.querySelectorAll('.sistema-table tbody tr');
+      gsap.set(rows, { opacity: 0, y: 20 });
+
+      gsap.to(rows, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out',
+          delay: 0.3
+      });
+
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+
+          rows.forEach(row => {
+              const nombre = row.getAttribute('data-nombre').toLowerCase();
+              const matricula = row.getAttribute('data-matricula').toLowerCase();
+              const tipo = row.getAttribute('data-tipo').toLowerCase();
+
+              const isVisible =
+                  nombre.includes(searchTerm) ||
+                  matricula.includes(searchTerm) ||
+                  tipo.includes(searchTerm);
+
+              if (isVisible) {
+                  gsap.to(row, { display: 'table-row', opacity: 1, duration: 0.3 });
+              } else {
+                  gsap.to(row, { display: 'none', opacity: 0, duration: 0.3 });
+              }
+          });
+      });
+  });
+</script>
+</body>
+</html>

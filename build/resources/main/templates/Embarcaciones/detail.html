@@ -208,74 +208,75 @@
   <div class="header-section">
     <h1>Detalle de la Embarcacion</h1>
     <div class="actions-group">
-      <a th:href="@{/sistemas/{id}/editar(id=${sistema.id})}" class="btn btn-primary">Editar</a>
-      <a href="/sistemas" class="btn btn-secondary">Volver al Listado</a>
+      <a th:href="@{/embarcaciones/{id}/editar(id=${embarcacion.id})}" class="btn btn-primary">Editar</a>
+      <a href="/embarcaciones" class="btn btn-secondary">Volver al Listado</a>
     </div>
   </div>
 
-  <div class="detail-card" th:if="${sistema}">
+  <div class="detail-card" th:if="${embarcacion}">
     <div class="detail-grid">
+
       <div class="detail-item">
         <div class="detail-label">ID</div>
-        <div class="detail-value" th:text="${sistema.id}"></div>
+        <div class="detail-value" th:text="${embarcacion.id}"></div>
       </div>
 
       <div class="detail-item">
         <div class="detail-label">Nombre</div>
-        <div class="detail-value" th:text="${sistema.nombre}"></div>
+        <div class="detail-value" th:text="${embarcacion.nombre}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Tipo De Enbarcacion</div>
-        <div class="detail-value" th:text="${sistema.numeroSerie}"></div>
+        <div class="detail-label">Tipo de Embarcación</div>
+        <div class="detail-value" th:text="${embarcacion.tipoEmbarcacion}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Matricula</div>
-        <div class="detail-value" th:text="${sistema.fechaInstalacion}"></div>
+        <div class="detail-label">Matrícula</div>
+        <div class="detail-value" th:text="${embarcacion.matricula}"></div>
       </div>
 
       <div class="detail-item">
         <div class="detail-label">Empresa Propietaria</div>
-        <div class="detail-value" th:text="${sistema.ubicacionEnEmbarcacion}"></div>
+        <div class="detail-value" th:text="${embarcacion.empresaPropietaria}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Capacidad Carga </div>
-        <div class="detail-value" th:text="${sistema.ubicacionEnEmbarcacion}"></div>
+        <div class="detail-label">Capacidad de Carga (ton)</div>
+        <div class="detail-value" th:text="${embarcacion.capacidadCarga}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Fecha De Construccion</div>
-        <div class="detail-value" th:text="${sistema.fechaUltimaRevision}"></div>
+        <div class="detail-label">Fecha de Construcción</div>
+        <div class="detail-value" th:text="${embarcacion.fechaConstruccion}"></div>
       </div>
 
       <div class="detail-item">
         <div class="detail-label">Estado</div>
         <div class="detail-value">
-                <span th:class="'estado-badge ' +
-                    ${sistema.estado == 'ACTIVO' ? 'estado-operativo' :
-                     sistema.estado == 'FALLA' ? 'estado-falla' :
-                     sistema.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
-                     'estado-desactivado'}"
-                      th:text="${sistema.estado}">
-                </span>
+        <span th:class="'estado-badge ' +
+              ${embarcacion.estado == 'ACTIVO' ? 'estado-operativo' :
+               embarcacion.estado == 'FALLA' ? 'estado-falla' :
+               embarcacion.estado == 'MANTENIMIENTO' ? 'estado-mantenimiento' :
+               'estado-desactivado'}"
+              th:text="${embarcacion.estado}">
+        </span>
         </div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Ubicacion Actual</div>
-        <div class="detail-value" th:text="${sistema.fechaProximoMantenimiento}"></div>
+        <div class="detail-label">Ubicación Actual</div>
+        <div class="detail-value" th:text="${embarcacion.ubicacionActual}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Fecha De Registro</div>
-        <div class="detail-value" th:text="${sistema.fechaUltimaRevision}"></div>
+        <div class="detail-label">Fecha de Registro</div>
+        <div class="detail-value" th:text="${embarcacion.fechaRegistro}"></div>
       </div>
 
       <div class="detail-item">
-        <div class="detail-label">Notas de Instalación</div>
-        <div class="detail-value" th:text="${sistema.notasInstalacion}"></div>
+        <div class="detail-label">Notas</div>
+        <div class="detail-value" th:text="${embarcacion.notas}"></div>
       </div>
 
     </div>
@@ -285,9 +286,9 @@
     <div class="delete-warning">
       <p><strong>Advertencia:</strong> Eliminar este Embarcacion es una acción irreversible.</p>
     </div>
-    <form th:action="@{/sistemas/{id}/eliminar(id=${sistema.id})}" method="post" style="display: inline;">
+    <form th:action="@{/embarcacion/{id}/eliminar(id=${embarcacion.id})}" method="post" style="display: inline;">
       <button type="submit" class="btn btn-danger"
-              onclick="return confirm('¿Está seguro de que desea eliminar este Embarcacion?')">
+              onclick="return confirm('¿Está seguro de que desea eliminar este embarcacion?')">
         Eliminar Embarcacion
       </button>
     </form>
