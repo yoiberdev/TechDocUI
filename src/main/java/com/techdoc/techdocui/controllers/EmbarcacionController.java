@@ -94,7 +94,7 @@ public class EmbarcacionController {
             request.setNotas(embarcacion.getNotas());
             request.setFechaRegistro(embarcacion.getFechaRegistro());
 
-            model.addAttribute("embarcoForm", request);
+            model.addAttribute("embarcacion", request);
             model.addAttribute("embarcoId", id);
             return "embarcaciones/form-edit";
         } catch (Exception e) {
@@ -105,7 +105,7 @@ public class EmbarcacionController {
 
     @PostMapping("/{id}/actualizar")
     public String actualizarEmbarcacion(@PathVariable Long id,
-                                        @ModelAttribute("embarcoForm") UpdateEmbarcacionRequest request,
+                                        @ModelAttribute("embarcacion") UpdateEmbarcacionRequest request,
                                         RedirectAttributes redirectAttributes) {
         try {
             embarcacionService.actualizarEmbarcacion(id, request);
