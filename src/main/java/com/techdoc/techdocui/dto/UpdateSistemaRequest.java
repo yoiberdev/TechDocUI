@@ -1,12 +1,17 @@
 package com.techdoc.techdocui.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class UpdateSistemaRequest {
     private String nombre;
     private String numeroSerie;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInstalacion;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaUltimaRevision;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaProximoMantenimiento;
     private Integer tiempoVidaRestante;
     private String tecnicoInstalador;
