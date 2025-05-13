@@ -70,7 +70,7 @@ public class SistemaService {
 
     // Nuevo método para obtener sistemas paginados
     public PaginatedResponse<Sistema> obtenerSistemasPaginados(int page, int size, String sortBy, String direction) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl + "/sistemas/paged")
+        String url = UriComponentsBuilder.fromUriString(apiBaseUrl + "/sistemas/paged")
                 .queryParam("page", page)
                 .queryParam("size", size)
                 .queryParam("sortBy", sortBy)

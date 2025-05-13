@@ -8,99 +8,31 @@ public class Sistema {
     private String numeroSerie;
     private String ubicacionEnEmbarcacion;
     private String estado;
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
 
-    // Constructor por defecto
-    public Sistema() {}
+    // 🔴 ESTO TE FALTA
+    private Long idEmbarcacion;
+    private Long idTipoSistema;
 
-    // Constructor con parámetros
-    public Sistema(Long id, String nombre, String numeroSerie, String ubicacionEnEmbarcacion, String estado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.numeroSerie = numeroSerie;
-        this.ubicacionEnEmbarcacion = ubicacionEnEmbarcacion;
-        this.estado = estado;
-    }
+    // Getters y setters...
 
-    // Getters y setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNumeroSerie() { return numeroSerie; }
+    public void setNumeroSerie(String numeroSerie) { this.numeroSerie = numeroSerie; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getUbicacionEnEmbarcacion() { return ubicacionEnEmbarcacion; }
+    public void setUbicacionEnEmbarcacion(String ubicacionEnEmbarcacion) { this.ubicacionEnEmbarcacion = ubicacionEnEmbarcacion; }
 
-    public String getNumeroSerie() {
-        return numeroSerie;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    public void setNumeroSerie(String numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
+    public Long getIdEmbarcacion() { return idEmbarcacion; }
+    public void setIdEmbarcacion(Long idEmbarcacion) { this.idEmbarcacion = idEmbarcacion; }
 
-    public String getUbicacionEnEmbarcacion() {
-        return ubicacionEnEmbarcacion;
-    }
-
-    public void setUbicacionEnEmbarcacion(String ubicacionEnEmbarcacion) {
-        this.ubicacionEnEmbarcacion = ubicacionEnEmbarcacion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public LocalDateTime getFechaActualizacion() {
-        return fechaActualizacion;
-    }
-
-    public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
-        this.fechaActualizacion = fechaActualizacion;
-    }
-
-    // Métodos de utilidad
-    public boolean isActivo() {
-        return "Activo".equalsIgnoreCase(this.estado);
-    }
-
-    public boolean isInactivo() {
-        return "Inactivo".equalsIgnoreCase(this.estado);
-    }
-
-    public boolean isEnMantenimiento() {
-        return "Mantenimiento".equalsIgnoreCase(this.estado);
-    }
-
-    @Override
-    public String toString() {
-        return "Sistema{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", numeroSerie='" + numeroSerie + '\'' +
-                ", ubicacionEnEmbarcacion='" + ubicacionEnEmbarcacion + '\'' +
-                ", estado='" + estado + '\'' +
-                '}';
-    }
+    public Long getIdTipoSistema() { return idTipoSistema; }
+    public void setIdTipoSistema(Long idTipoSistema) { this.idTipoSistema = idTipoSistema; }
 }

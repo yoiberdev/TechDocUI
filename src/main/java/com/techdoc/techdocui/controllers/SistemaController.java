@@ -20,21 +20,7 @@ public class SistemaController {
     @Autowired
     private SistemaService sistemaService;
 
-    // Mostrar todos los sistemas (ya existente)
     @GetMapping
-    public String listarSistemas(Model model) {
-        try {
-            List<Sistema> sistemas = sistemaService.obtenerTodosLosSistemas();
-            model.addAttribute("sistemas", sistemas);
-            return "sistemas/list";
-        } catch (Exception e) {
-            model.addAttribute("error", "Error al cargar los sistemas: " + e.getMessage());
-            return "sistemas/list";
-        }
-    }
-
-    // Mostrar sistemas paginados
-    @GetMapping("/paginados")
     public String listarSistemasPaginados(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -55,8 +41,8 @@ public class SistemaController {
         }
     }
 
-    // Ver detalle de sistema (ya existente)
-    @GetMapping("/{id}")
+    // 🚨 Cambiado para evitar colisión
+    @GetMapping("/detalle/{id}")
     public String verSistema(@PathVariable Long id, Model model) {
         try {
             Sistema sistema = sistemaService.obtenerSistemaPorId(id);
@@ -67,29 +53,33 @@ public class SistemaController {
             return "sistemas/detail";
         }
     }
+    @ModelAttribute("sistema")
+    public CreateSistemaRequest sistemaForm() {
+        return new CreateSistemaRequest();
+    }
 
-    // Mostrar formulario para crear sistema
     @GetMapping("/nuevo")
     public String mostrarFormularioCrear(Model model) {
-        model.addAttribute("sistema", new CreateSistemaRequest());
+        CreateSistemaRequest request = new CreateSistemaRequest();
+        System.out.println("DEBUG: creando CreateSistemaRequest vacío");
+        model.addAttribute("sistema", request);
         return "sistemas/form-create";
     }
 
-    // Crear sistema
+
     @PostMapping
     public String crearSistema(@ModelAttribute CreateSistemaRequest request,
                                RedirectAttributes redirectAttributes) {
         try {
             Sistema sistema = sistemaService.crearSistema(request);
             redirectAttributes.addFlashAttribute("mensaje", "Sistema creado exitosamente");
-            return "redirect:/sistemas/" + sistema.getId();
+            return "redirect:/sistemas/detail/" + sistema.getId();
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al crear el sistema: " + e.getMessage());
             return "redirect:/sistemas/nuevo";
         }
     }
 
-    // Mostrar formulario para editar sistema
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
         try {
@@ -105,11 +95,10 @@ public class SistemaController {
             return "sistemas/form-edit";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el sistema: " + e.getMessage());
-            return "sistemas/list";
+            return "sistemas/list-paginated";
         }
     }
 
-    // Actualizar sistema
     @PostMapping("/{id}/actualizar")
     public String actualizarSistema(@PathVariable Long id,
                                     @ModelAttribute UpdateSistemaRequest request,
@@ -117,14 +106,13 @@ public class SistemaController {
         try {
             sistemaService.actualizarSistema(id, request);
             redirectAttributes.addFlashAttribute("mensaje", "Sistema actualizado exitosamente");
-            return "redirect:/sistemas/" + id;
+            return "redirect:/sistemas/detail/" + id;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al actualizar el sistema: " + e.getMessage());
             return "redirect:/sistemas/" + id + "/editar";
         }
     }
 
-    // Eliminar sistema
     @PostMapping("/{id}/eliminar")
     public String eliminarSistema(@PathVariable Long id,
                                   RedirectAttributes redirectAttributes) {
@@ -134,11 +122,10 @@ public class SistemaController {
             return "redirect:/sistemas";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al eliminar el sistema: " + e.getMessage());
-            return "redirect:/sistemas/" + id;
+            return "redirect:/sistemas/detail/" + id;
         }
     }
 
-    // Buscar sistemas por embarcación
     @GetMapping("/embarcacion/{idEmbarcacion}")
     public String listarSistemasPorEmbarcacion(@PathVariable Long idEmbarcacion, Model model) {
         try {
@@ -152,7 +139,6 @@ public class SistemaController {
         }
     }
 
-    // Buscar sistemas por tipo
     @GetMapping("/tipo/{idTipoSistema}")
     public String listarSistemasPorTipo(@PathVariable Long idTipoSistema, Model model) {
         try {
@@ -166,7 +152,6 @@ public class SistemaController {
         }
     }
 
-    // Buscar sistemas por estado
     @GetMapping("/estado/{estado}")
     public String listarSistemasPorEstado(@PathVariable String estado, Model model) {
         try {
@@ -180,7 +165,6 @@ public class SistemaController {
         }
     }
 
-    // Buscar sistemas que requieren mantenimiento
     @GetMapping("/mantenimiento-requerido")
     public String listarSistemasQueRequierenMantenimiento(Model model) {
         try {
@@ -194,7 +178,6 @@ public class SistemaController {
         }
     }
 
-    // Buscar sistemas por nombre
     @GetMapping("/buscar")
     public String buscarSistemasPorNombre(@RequestParam String nombre, Model model) {
         try {
