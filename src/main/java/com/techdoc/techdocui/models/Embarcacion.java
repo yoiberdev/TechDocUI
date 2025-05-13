@@ -1,12 +1,22 @@
 package com.techdoc.techdocui.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
 public class Embarcacion {
     private Long id;
     private String nombre;
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
     public Long getId() {
         return id;
@@ -24,52 +34,36 @@ public class Embarcacion {
         this.nombre = nombre;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getTipoEmbarcacion() {
+        return tipoEmbarcacion;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setTipoEmbarcacion(String tipoEmbarcacion) {
+        this.tipoEmbarcacion = tipoEmbarcacion;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getEmpresaPropietaria() {
+        return empresaPropietaria;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setEmpresaPropietaria(String empresaPropietaria) {
+        this.empresaPropietaria = empresaPropietaria;
     }
 
-    public String getModelo() {
-        return modelo;
+    public Double getCapacidadCarga() {
+        return capacidadCarga;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setCapacidadCarga(Double capacidadCarga) {
+        this.capacidadCarga = capacidadCarga;
     }
 
-    public String getPropietario() {
-        return propietario;
+    public LocalDate getFechaConstruccion() {
+        return fechaConstruccion;
     }
 
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
-    }
-
-    public String getContactoPropietario() {
-        return contactoPropietario;
-    }
-
-    public void setContactoPropietario(String contactoPropietario) {
-        this.contactoPropietario = contactoPropietario;
-    }
-
-    public LocalDate getFechaFabricacion() {
-        return fechaFabricacion;
-    }
-
-    public void setFechaFabricacion(LocalDate fechaFabricacion) {
-        this.fechaFabricacion = fechaFabricacion;
+    public void setFechaConstruccion(LocalDate fechaConstruccion) {
+        this.fechaConstruccion = fechaConstruccion;
     }
 
     public String getEstado() {
@@ -96,24 +90,23 @@ public class Embarcacion {
         this.notas = notas;
     }
 
-    public String getImagen() {
-        return imagen;
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     private String matricula;
-    private String tipo;
-    private String modelo;
-    private String propietario;
-    private String contactoPropietario;
-    private LocalDate fechaFabricacion;
+    private String tipoEmbarcacion;
+    private String empresaPropietaria;
+    private Double capacidadCarga;
+    private LocalDate fechaConstruccion;
     private String estado;
     private String ubicacionActual;
     private String notas;
-    private String imagen;
+    private LocalDateTime fechaRegistro;
 
     // Constructores
     public Embarcacion() {}
